@@ -3,28 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My IP Address</title>
+    <title>My IP Addresses</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
         }
+        .ip-address {
+            margin: 10px 0;
+        }
+        .vpn-info {
+            margin-top: 30px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
 </head>
 <body>
-    <h1>Your Public IP Address</h1>
-    <p id="ip-address">Loading...</p>
+    <h1>Your Public IP Addresses</h1>
+    <div class="ip-address" id="ipv4-address">IPv4: Loading...</div>
+    <div class="ip-address" id="ipv6-address">IPv6: Loading...</div>
+
+    <div class="vpn-info">
+        <h2>Importance of VPNs in Cybersecurity</h2>
+        <p>
+            Virtual Private Networks (VPNs) are essential tools for enhancing online privacy and security. 
+            By encrypting your internet connection, a VPN protects your data from eavesdroppers, especially 
+            when using public Wi-Fi networks. This encryption makes it significantly harder for hackers and 
+            malicious entities to intercept your data.
+        </p>
+        <p>
+            Additionally, VPNs allow you to mask your IP address, making it more difficult for websites and 
+            online services to track your online activities. This can help protect your personal information 
+            from being harvested by advertisers or other third parties.
+        </p>
+        <p>
+            Moreover, VPNs can help you bypass geo-restrictions, allowing access to content that may be 
+            blocked in your region. However, it's essential to choose a reputable VPN provider to ensure 
+            your data remains secure and private.
+        </p>
+    </div>
 
     <script>
-        // Fetch the public IP address
+        // Fetch the public IPv4 address
         fetch('https://api.ipify.org?format=json')
             .then(response => response.json())
             .then(data => {
-                document.getElementById('ip-address').innerText = data.ip;
+                document.getElementById('ipv4-address').innerText = 'IPv4: ' + data.ip;
             })
             .catch(error => {
-                document.getElementById('ip-address').innerText = 'Error fetching IP address';
+                document.getElementById('ipv4-address').innerText = 'Error fetching IPv4 address';
+                console.error('Error:', error);
+            });
+
+        // Fetch the public IPv6 address
+        fetch('https://api64.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('ipv6-address').innerText = 'IPv6: ' + data.ip;
+            })
+            .catch(error => {
+                document.getElementById('ipv6-address').innerText = 'Error fetching IPv6 address';
                 console.error('Error:', error);
             });
     </script>
